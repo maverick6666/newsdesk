@@ -1,0 +1,155 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /* Scrollbar — warm, minimal */
+  ::-webkit-scrollbar { width: 5px; height: 5px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: rgba(255, 245, 230, 0.06); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: rgba(255, 245, 230, 0.12); }
+  ::selection { background: rgba(212, 146, 42, 0.25); color: #e6ded4; }
+}
+
+@layer components {
+  /* ─── Card System ─────────────────────────────── */
+  /* Borders-only depth. No shadows. No blur. No glass. */
+
+  .nd-card {
+    @apply relative rounded-xl;
+    background: #232120;
+    border: 1px solid rgba(255, 245, 230, 0.07);
+    transition: border-color 0.2s ease;
+  }
+  .nd-card:hover {
+    border-color: rgba(255, 245, 230, 0.14);
+  }
+
+  .nd-card-hero {
+    @apply relative rounded-xl;
+    background: #232120;
+    border: 1px solid rgba(255, 245, 230, 0.09);
+    transition: border-color 0.25s ease;
+  }
+  .nd-card-hero:hover {
+    border-color: rgba(255, 245, 230, 0.18);
+  }
+
+  /* ─── Panels ────────────────────────────────── */
+
+  .nd-panel-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    background: rgba(0, 0, 0, 0.5);
+  }
+
+  .nd-panel-sheet {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: min(660px, 92vw);
+    z-index: 51;
+    background: #1a1816;
+    border-left: 1px solid rgba(255, 245, 230, 0.07);
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  /* ─── Confidence Pulse (Signature Element) ──── */
+  /* A thin bar at the card bottom that fills proportionally to AI confidence. */
+  /* Wider = more confident. The visual rhythm of certainty. */
+
+  .confidence-pulse {
+    @apply absolute bottom-0 left-0 h-[2px] rounded-b-xl;
+    transition: width 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  /* ─── Signal Tint ───────────────────────────── */
+  /* Subtle background warmth based on signal direction */
+
+  .signal-tint-up {
+    background: linear-gradient(135deg, rgba(74, 173, 114, 0.05) 0%, #232120 50%);
+  }
+  .signal-tint-down {
+    background: linear-gradient(135deg, rgba(200, 80, 80, 0.05) 0%, #232120 50%);
+  }
+
+  /* ─── Loading ───────────────────────────────── */
+
+  .shimmer {
+    background: linear-gradient(90deg, rgba(255, 245, 230, 0.02) 0%, rgba(255, 245, 230, 0.05) 50%, rgba(255, 245, 230, 0.02) 100%);
+    background-size: 200% 100%;
+    animation: shimmer 2s linear infinite;
+  }
+
+  /* ─── Legacy: keep glass-card for unredesigned components ─ */
+  .glass-card {
+    @apply relative overflow-hidden rounded-xl;
+    background: #232120;
+    border: 1px solid rgba(255, 245, 230, 0.07);
+    transition: border-color 0.2s ease;
+  }
+  .glass-card:hover {
+    border-color: rgba(255, 245, 230, 0.14);
+  }
+
+  .glass-panel {
+    background: #1a1816;
+    border-bottom: 1px solid rgba(255, 245, 230, 0.07);
+  }
+
+  /* Legacy panel classes — redirect to new */
+  .panel-overlay { @apply nd-panel-overlay; }
+  .panel-sheet { @apply nd-panel-sheet flex flex-col; }
+
+  /* Legacy card classes */
+  .glass-card-hero { @apply nd-card-hero; }
+  .glass-card-medium { @apply nd-card; }
+  .glass-card-compact { @apply nd-card; }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* ─── React Flow (kept for panel flow tab) ────── */
+.react-flow__pane { cursor: grab; }
+.react-flow__pane:active { cursor: grabbing; }
+.react-flow__edge-path { stroke-linecap: round; }
+.react-flow__edge.animated path { animation: flowDash 1.5s linear infinite; }
+@keyframes flowDash { to { stroke-dashoffset: -20; } }
+.react-flow__minimap {
+  background: #121110 !important;
+  border: 1px solid rgba(255, 245, 230, 0.07) !important;
+  border-radius: 10px !important;
+}
+.react-flow__controls { box-shadow: none !important; }
+
+.flow-news-node {
+  background: #1a1816;
+  border: 1px solid rgba(255, 245, 230, 0.09);
+  border-radius: 12px;
+  padding: 14px 18px;
+  min-width: 240px;
+  max-width: 300px;
+  transition: border-color 0.2s ease;
+}
+.flow-news-node:hover {
+  border-color: rgba(255, 245, 230, 0.18);
+}
+
+.flow-insight-node {
+  background: rgba(212, 146, 42, 0.06);
+  border: 1px solid rgba(212, 146, 42, 0.20);
+  border-radius: 12px;
+  padding: 16px 20px;
+  min-width: 260px;
+  max-width: 340px;
+  transition: border-color 0.2s ease;
+}
+.flow-insight-node:hover {
+  border-color: rgba(212, 146, 42, 0.35);
+}
