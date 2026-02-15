@@ -24,15 +24,11 @@ Thumbs.db
 # Docker
 postgres_data/
 
-# Memory (development notes)
-memory/
-
 # Screenshots / dev artifacts
 *.png
 map-snapshot.md
 
 # MCP / Figma tools (local)
-.mcp.json
 .playwright-mcp/
 claude-talk-to-figma-mcp/
 start-figma-mcp.bat
